@@ -4,5 +4,5 @@
     $password = "";
     $dbName = "chat_app";
 
-    mysqli_connect($server, $user, $password, $dbName) or die("Database connection failed.");
+    $conn = mysqli_connect($server, $user, $password, $dbName) or die("Database connection failed.");
 ?>

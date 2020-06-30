@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="signIn-form">
-        <form action="" method="post">
+        <form action="signIn_user.php" method="post">
             <div class="form-header">
                 <h2>Sign In</h2>
                 <p>Login to MyChat</p>
