@@ -66,7 +66,7 @@ body {
     min-width: 200px;
 }
 .signIn-form .btn:hover, .signIn-form .btn:focus {
-    background: #00b073; !important;
+    background: #00b073 !important;
     outline:none;
 }
 .signIn-form a {
