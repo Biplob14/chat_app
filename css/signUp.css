@@ -38,12 +38,12 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.signIn-form {
+.signUp-form {
     width: 390px;
     margin: 0 auto;
     padding: 30px 0;
 }
-.signIn-form form {
+.signUp-form form {
     color: #999;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -51,32 +51,35 @@ body {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 30px;
 }
-.signIn-form .form-group {
+.signUp-form .form-group {
     margin-bottom: 20px;
 }
-.signIn-form label {
+.signUp-form label {
     font-weight: normal;
     font-size: 13px;
 }
-.signIn-form .btn {
+.signUp-form input[type="checkbox"] {
+    margin-top: 2px;
+}
+.signUp-form .btn {
     font-size: 16px;
     font-weight: bold;
     background: #00cb82;
     border: none;
     min-width: 200px;
 }
-.signIn-form .btn:hover, .signIn-form .btn:focus {
+.signUp-form .btn:hover, .signIn-form .btn:focus {
     background: #00b073; !important;
     outline:none;
 }
-.signIn-form a {
+.signUp-form a {
     color: #00cb82;
 }
-.signIn-form a:hover {
+.signUp-form a:hover {
     text-decoration: underline;
     font-weight: bold;
 }
-.signIn-form .text-center {
+.signUp-form .text-center {
     background: rgba(59, 60, 63, 0.377);
     border-radius: 10px;
     font-size: 1.1em;
