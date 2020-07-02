@@ -70,10 +70,30 @@
                                 <button name="logout" class="btn btn-danger">Logout</button>
                             </form>
                             <?php if(isset($_POST['logout'])){
-                                // $update_msg = mysqli_query($conn, "UPDATE users SET login")
+                                $update_msg = mysqli_query($conn, "UPDATE users SET login='offline' WHERE user_name = '$user_name'");
+                                header("Location:logout.php");
+                                exit();
                             } ?>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                            <div id="scrolling_to_bottom" class="col-md-12 right-header-contentChat">
+                                <?php
+                                    $update_msg = mysqli_query($conn, "UPDATE users_chats SET msg_status='read' 
+                                    WHERE sender_username = '$user_name' AND receiver_username = '$user_name'");
+                                    
+                                    $sel_msg = "SELECT * FROM user_chats WHERE (sender_username = '$user_name' 
+                                    AND receiver_username='$username') OR (receiver_username='$user_name' AND sender_username = '$username') ORDER BY 1 ASC";
+                                    $run_msg = mysqli_query($conn, $sel_msg);
+                                    while($row = mysqli_fetch_array($run_msg)) {
+                                        $sender_username = $row['sender_username'];
+                                        $receiver_username = $row['receiver_username'];
+                                        $msg_content = $row['msg_content'];
+                                        $msg_date = $row['msg_date'];
+                                    }
+                                ?>
+                            </div>
                 </div>
             </div>
         </div>
