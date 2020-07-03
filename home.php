@@ -93,6 +93,20 @@
                                         $msg_date = $row['msg_date'];
                                     }
                                 ?>
+                                <ul>
+                                    <?php
+                                        if($user_name == $sender_username AND $username = $receiver_username){
+                                            echo "
+                                                <li>
+                                                    <div class='rightside-chat'>
+                                                        <span>$username <small>$msg_date</small></span>
+                                                        <p>$msg_content</p>
+                                                    </div>
+                                                </li>
+                                            ";
+                                        }
+                                    ?>
+                                </ul>
                             </div>
                 </div>
             </div>
