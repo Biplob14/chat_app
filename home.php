@@ -78,39 +78,87 @@
                     </div>
                 </div>
                 <div class="row">
-                            <div id="scrolling_to_bottom" class="col-md-12 right-header-contentChat">
-                                <?php
-                                    $update_msg = mysqli_query($conn, "UPDATE users_chats SET msg_status='read' 
-                                    WHERE sender_username = '$user_name' AND receiver_username = '$user_name'");
-                                    
-                                    $sel_msg = "SELECT * FROM user_chats WHERE (sender_username = '$user_name' 
-                                    AND receiver_username='$username') OR (receiver_username='$user_name' AND sender_username = '$username') ORDER BY 1 ASC";
-                                    $run_msg = mysqli_query($conn, $sel_msg);
-                                    while($row = mysqli_fetch_array($run_msg)) {
-                                        $sender_username = $row['sender_username'];
-                                        $receiver_username = $row['receiver_username'];
-                                        $msg_content = $row['msg_content'];
-                                        $msg_date = $row['msg_date'];
-                                    }
-                                ?>
-                                <ul>
-                                    <?php
-                                        if($user_name == $sender_username AND $username = $receiver_username){
-                                            echo "
-                                                <li>
-                                                    <div class='rightside-chat'>
-                                                        <span>$username <small>$msg_date</small></span>
-                                                        <p>$msg_content</p>
-                                                    </div>
-                                                </li>
-                                            ";
-                                        }
-                                    ?>
-                                </ul>
-                            </div>
+                    <div id="scrolling_to_bottom" class="col-md-12 right-header-contentChat">
+                        <?php
+                            $update_msg = mysqli_query($conn, "UPDATE users_chats SET msg_status='read' 
+                            WHERE sender_username = '$user_name' AND receiver_username = '$user_name'");
+                            
+                            $sel_msg = "SELECT * FROM user_chats WHERE (sender_username = '$user_name' 
+                            AND receiver_username='$username') OR (receiver_username='$user_name' AND sender_username = '$username') ORDER BY 1 ASC";
+                            $run_msg = mysqli_query($conn, $sel_msg);
+                            while($row = mysqli_fetch_array($run_msg)) {
+                                $sender_username = $row['sender_username'];
+                                $receiver_username = $row['receiver_username'];
+                                $msg_content = $row['msg_content'];
+                                $msg_date = $row['msg_date'];
+                            
+                        ?>
+                        <ul>
+                            <?php
+                                // for sender view
+                                if($user_name == $sender_username AND $username = $receiver_username){
+                                    echo "
+                                        <li>
+                                            <div class='rightside-chat'>
+                                                <span>$username <small>$msg_date</small></span>
+                                                <p>$msg_content</p>
+                                            </div>
+                                        </li>
+                                    ";
+                                }
+                                // for receiver view
+                                else if($user_name == $receiver_username AND $username = $sender_username){
+                                    echo "
+                                        <li>
+                                            <div class='rightside-chat'>
+                                                <span>$username <small>$msg_date</small></span>
+                                                <p>$msg_content</p>
+                                            </div>
+                                        </li>
+                                    ";
+                                }
+                            ?>
+                        </ul>
+                        <?php } ?> <!--close of while loop -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 right-chat-textbox">
+                        <form method="post">
+                            <input autocomplete="off" type="text" name="msg_content" placeholder="type your message">
+                            <button class="btn" name="submit"><i class="fa fa-telegram" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php
+        if(isset($_POST['submit'])){
+            $msg = htmlentities($_POST['msg_content']);
+
+            if($msg == ""){
+                echo "
+                    <div class='alert alert-danger'>
+                        <strong><center>Message was unable to send</center></strong>
+                    </div>
+                ";
+            }
+            else if(strlen($msg) > 100){
+                echo "
+                    <div class='alert alert-danger'>
+                        <strong><center>Message is too long.Use max 100 characters</center></strong>
+                    </div>
+                ";
+            }
+            else{
+                $insert = "INSERT INTO users_chats(sender_username, receiver_username, msg_content, msg_status, msg_date) 
+                VALUES('$user_name', '$username', '$msg', 'unread', NOW())";
+                $run_insert = mysqli_query($conn, $insert);
+                
+            }
+        }
+    ?>
 </body>
 </html>
