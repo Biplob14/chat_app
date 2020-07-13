@@ -1,4 +1,10 @@
-<?php include "header.php" ?>
+<?php 
+session_start();
+include "header.php";
+if(!isset($_SESSION['user_email'])){
+    header("location:signIn.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +30,7 @@
                 </div>
                 <div class="left-chat">
                     <ul>
-                        <!-- <?php include("includes/get_users_data.php"); ?> -->
+                        <?php include("includes/get_users_data.php");?>
                     </ul>
                 </div>
             </div>
@@ -41,6 +47,7 @@
                         $user_name = $row['user_name'];
 
                         // getting user data on click
+                        
                         if(isset($_GET['user_name'])){
                             global $conn;
 
@@ -49,11 +56,11 @@
 
                             $run_user = mysqli_query($conn, $get_user);
                             $row_user = mysqli_fetch_array($run_user);
-                            $user_name = $row_user['user_name'];
+                            $username = $row_user['user_name'];
                             $user_profile_image = $row_user['user_profile'];
                             
                         }
-                        $total_messages = "SELECT * FROM users_chats WHERE 
+                        $total_messages = "SELECT * FROM users_chat WHERE 
                         (sender_username = '$user_name' AND receiver_username = '$username') OR 
                         (receiver_username='$user_name' AND sender_username='$username')";
 

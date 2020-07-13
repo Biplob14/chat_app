@@ -1,6 +1,6 @@
 <?php
-    include "../header.php";
-    include "config.php";
+    include "./header.php";
+    // include "config.php";
 
     $user = "SELECT * FROM users";
     $run_user = mysqli_query($conn, $user);
@@ -19,7 +19,7 @@
                 <div class='chat-left-details'>
                 <p><a href='home.php?user_name=$user_name'>$user_name</a></p>
             ";
-            if($login == "online") {
+            if($login == 'online') {
                 echo "<span><li class='fa fa-circle' aria-hidden='true'>Online</li></span>";
             }else {
                 echo "<span><li class='fa fa-circle-o' aria-hidden='true'>Offine</li></span>";
