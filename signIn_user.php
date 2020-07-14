@@ -22,7 +22,7 @@
             $row = mysqli_fetch_array($run_user);
 
             $user_name = $row['user_name'];
-            echo "<script>window.open('home.php?user_name = $user_name', '_self');</script>";
+            echo "<script>window.open('home.php?user_name=$user_name', '_self');</script>";
         } else {
             echo "<div clas='alert alert-danger'>
                     <strong>Check your email or password !</strong>

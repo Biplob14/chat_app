@@ -47,10 +47,11 @@ if(!isset($_SESSION['user_email'])){
                         $user_name = $row['user_name'];
 
                         // getting user data on click
-                        
+                        // echo $_GET['user_name'];
+                        // die("Value not found");
                         if(isset($_GET['user_name'])){
                             global $conn;
-
+                            
                             $get_username = $_GET['user_name'];
                             $get_user = "SELECT * FROM users where user_name = '$get_username'";
 
@@ -69,7 +70,7 @@ if(!isset($_SESSION['user_email'])){
                     ?>
                     <div class="col-md-12 right-header">
                         <div class="right-header-img">
-                            <img src="<?php echo"$user_profile_image";?>" alt="">
+                            <img src="<?php echo'$user_profile_image';?>" alt="">
                         </div>
                         <div class="right-header-detail">
                             <form action="" method="post">
@@ -91,15 +92,17 @@ if(!isset($_SESSION['user_email'])){
                             $update_msg = mysqli_query($conn, "UPDATE users_chats SET msg_status='read' 
                             WHERE sender_username = '$user_name' AND receiver_username = '$user_name'");
                             
-                            $sel_msg = "SELECT * FROM user_chats WHERE (sender_username = '$user_name' 
-                            AND receiver_username='$username') OR (receiver_username='$user_name' AND sender_username = '$username') ORDER BY 1 ASC";
+                            $sel_msg = "SELECT * FROM users_chat WHERE (sender_username = '$user_name' 
+                            AND receiver_username='$username') OR (receiver_username='$user_name' 
+                            AND sender_username = '$username') ORDER BY 1 ASC";
+                            
                             $run_msg = mysqli_query($conn, $sel_msg);
                             while($row = mysqli_fetch_array($run_msg)) {
                                 $sender_username = $row['sender_username'];
                                 $receiver_username = $row['receiver_username'];
                                 $msg_content = $row['msg_content'];
                                 $msg_date = $row['msg_date'];
-                            
+
                         ?>
                         <ul>
                             <?php
